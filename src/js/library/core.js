@@ -2,7 +2,7 @@
 export default class Core {
   constructor (selector) {
     this.selector = document.querySelectorAll(selector);
-    //return this.init();
+
   }
 
   init(selector) {
@@ -19,6 +19,6 @@ export default class Core {
   }
   
 }
-//const $ = Core.init();
+
 Core.prototype.init.prototype = Core.prototype;
 window.$ = Core;
