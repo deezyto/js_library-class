@@ -17,8 +17,8 @@ gulp.task("copy-html", () => {
                 .pipe(browsersync.stream());
 });
 
-gulp.task("build-sass", () => {
-    return gulp.src("./src/sass/style.scss")
+gulp.task("build-scss", () => {
+    return gulp.src("./src/scss/style.scss")
                 .pipe(sass().on('error', sass.logError))
                 .pipe(gulp.dest(dist))
                 .pipe(browsersync.stream());
@@ -65,13 +65,13 @@ gulp.task("watch", () => {
     
     gulp.watch("./src/index.html", gulp.parallel("copy-html"));
     gulp.watch("./src/js/**/*.js", gulp.parallel("build-js"));
-    gulp.watch("./src/sass/**/*.scss", gulp.parallel("build-sass"));
+    gulp.watch("./src/scss/**/*.scss", gulp.parallel("build-scss"));
 });
 
-gulp.task("build", gulp.parallel("copy-html", "build-js", "build-sass"));
+gulp.task("build", gulp.parallel("copy-html", "build-js", "build-scss"));
 
 gulp.task("prod", () => {
-    gulp.src("./src/sass/style.scss")
+    gulp.src("./src/scss/style.scss")
         .pipe(sass().on('error', sass.logError))
         .pipe(postcss([autoprefixer()]))
         .pipe(cleanCSS())
