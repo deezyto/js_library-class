@@ -7,12 +7,10 @@ export default class Core {
   }
 
   init() {
-    /* if (!this.selector) {
+    if (!this.selector) {
       return this;
-    } */
-
-    //Object.assign(this, this.selector);
-    console.log(this.selector);
+    }
+    
     return this;
   }
 }
