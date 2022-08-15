@@ -1,7 +1,6 @@
 import $ from '../core';
 
 $.prototype.ifIndex = function(index = []) {
-  console.log({...index});
   if (index === null) {
     this.selector = this.copySelector[0];
     this.length = this.copySelector[1];
@@ -12,7 +11,6 @@ $.prototype.ifIndex = function(index = []) {
   for (let i = 0; i < this.length; i++) {
     for (let item in elem) {
       if (i === elem[item]) {
-        console.log(this.selector[i]);
         newSelector.push(this.selector[i]);
       }
     }
