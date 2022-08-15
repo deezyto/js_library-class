@@ -13,3 +13,14 @@ $.prototype.removeClass = function(...className) {
   }
   return this;
 };
+
+$.prototype.toggleClass = function(...className) {
+  const classList = {...className};
+  for (let i = 0; i < this.length; i++) {
+    for (let item in classList) {
+      this.selector[i].classList.toggle(classList[item]);
+    }
+    
+  }
+  return this;
+};
