@@ -1,5 +1,5 @@
-import Core from './library/core';
+import $ from './library/lib';
 
 window.addEventListener('DOMContentLoaded', () => {
-  new Core('.library').init();
+  new $('.library').addClass('test');
 });
