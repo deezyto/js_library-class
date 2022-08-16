@@ -1,0 +1,36 @@
+.btn {
+    padding: 5px 10px;
+    font-size: 15px;
+    background: white;
+    font-weight: 500;
+    border-radius: 15px;
+    transition: 0.5s all;
+    color: #000;
+}
+
+.btn-blue {
+    border: 2px solid $blue-color;
+    &:hover {
+        border: 2px solid $blue-color;
+        background: $blue-color;
+        color: white;
+    }
+}
+
+.btn-green {
+    border: 2px solid $green-color;
+    &:hover {
+        border: 2px solid $green-color;
+        background: $green-color;
+        color: white;
+    }
+}
+
+.btn-yellow {
+    border: 2px solid $yellow-color;
+    &:hover {
+        border: 2px solid $yellow-color;
+        background: $yellow-color;
+        color: white;
+    }
+}
