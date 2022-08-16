@@ -1,7 +1,7 @@
 import $ from '../core';
 
 $.prototype.ifIndex = function(index = []) {
-  if (index === null) {
+  if (index.length === 0) {
     this.selector = this.copySelector[0];
     this.length = this.copySelector[1];
     return this;
