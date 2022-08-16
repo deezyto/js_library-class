@@ -1,0 +1,41 @@
+.tab {
+    max-width: 100%;
+    font-size: 15px;
+    padding: 0;
+    position: relative;
+    ul {
+        list-style-type: none;
+        display: flex;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        overflow: hidden;
+        background: $blue-color;
+        li {
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            &.tab-active {
+                background: rgb(60, 60, 243);
+            }
+        }
+    }
+    .tab-content {
+        visibility: hidden;
+        overflow: hidden;
+        height: 0;
+        opacity: 0;
+        position: relative;
+        &.tab-active {
+            transition: 0.5s all;
+            visibility: visible;
+            height: 100%;
+            opacity: 1;
+            padding: 10px;
+            padding-bottom: 0;
+            border: 2px solid $blue-color;
+        }
+        p {
+            padding-bottom: 10px;
+        }
+    }
+}

@@ -4,14 +4,15 @@ $.prototype.event = function(callback, ...event) {
   const eventList = {...event};
   for (let i = 0; i < this.length; i++) {
     for (let item in eventList) {
-      this.selector[i].addEventListener(eventList[item], () => {
+      this.selector[i].addEventListener(eventList[item], (e) => {
         console.log('click');
         if (callback) {
-          callback();
+          callback(e);
         }
       });
     }
   }
+  return this;
 };
 
 $.prototype.eventClick = function(callback) {
@@ -23,4 +24,5 @@ $.prototype.eventClick = function(callback) {
       }
     });
   }
+  return this;
 };
