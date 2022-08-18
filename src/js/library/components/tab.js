@@ -2,8 +2,7 @@ import $ from '../core';
 
 $.prototype.onTab = (e, self, selector) => {
   let attribute;
-  console.log(self)
-  selector.querySelectorAll('[data-tab-name]').forEach(item => {
+  selector.parentNode.parentNode.querySelectorAll('[data-tab-name]').forEach(item => {
     item.classList.remove('tab-active');
     if (item === e.target) {
       attribute = item.getAttribute('data-tab-name');
@@ -33,5 +32,15 @@ $.prototype.tabCreate = function(count) {
       }
     }
   }
+ 
+
+  let newSelector = [];
+  this.selector[0].querySelectorAll('.tab-nav li').forEach(item => {
+    newSelector.push(item);
+  });
+
+  this.selector = newSelector;
+  this.length = newSelector.length;
+
   return this;
 };
