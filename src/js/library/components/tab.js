@@ -1,25 +1,21 @@
 import $ from '../core';
 
 $.prototype.onTab = (e, self, selector) => {
-
   let attribute;
-  //for (let i = 0; i < 1; i++) {
-    selector.querySelectorAll('[data-tab-name]').forEach(item => {
-      item.classList.remove('tab-active');
-      if (item === e.target) {
-        attribute = item.getAttribute('data-tab-name');
-        item.classList.add('tab-active');
-      }
-      if (item.getAttribute('data-tab-name') === attribute) {
-        item.classList.add('tab-active');
-      }
-    });
-  //}
+  selector.querySelectorAll('[data-tab-name]').forEach(item => {
+    item.classList.remove('tab-active');
+    if (item === e.target) {
+      attribute = item.getAttribute('data-tab-name');
+      item.classList.add('tab-active');
+    }
+    if (item.getAttribute('data-tab-name') === attribute) {
+      item.classList.add('tab-active');
+    }
+  });
   return self;
-
 };
-$.prototype.tabCreate = function(count) {
 
+$.prototype.tabCreate = function(count) {
   for (let i = 0; i < this.length; i++) {
     this.selector[i].classList.add('tab');
     this.selector[i].querySelector('ul').classList.add('tab-nav');
@@ -36,9 +32,6 @@ $.prototype.tabCreate = function(count) {
         div.classList.add('tab-active');
       }
     }
-    
-
   }
-
   return this;
 };
