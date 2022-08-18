@@ -24,7 +24,6 @@ $.prototype.tabCreate = function(count) {
     for (let j = 0; j < count; j++) {
       const li = this.selector[i].querySelectorAll('li')[j];
       const div = this.selector[i].querySelectorAll('div')[j];
-      
       li.setAttribute('data-tab-name', j);
       div.setAttribute('data-tab-name', j);
       div.classList.add('tab-content');
