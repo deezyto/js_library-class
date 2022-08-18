@@ -1,19 +1,44 @@
 import $ from '../core';
 
-$.prototype.onTab = (e) => {
+$.prototype.onTab = (e, self, selector) => {
 
   let attribute;
-  document.querySelectorAll('[data-tab-name]').forEach(item => {
-    item.classList.remove('tab-active');
-    if (item === e.target) {
-      attribute = item.getAttribute('data-tab-name');
-      item.classList.add('tab-active');
-    }
+  //for (let i = 0; i < 1; i++) {
+    selector.querySelectorAll('[data-tab-name]').forEach(item => {
+      item.classList.remove('tab-active');
+      if (item === e.target) {
+        attribute = item.getAttribute('data-tab-name');
+        item.classList.add('tab-active');
+      }
+      if (item.getAttribute('data-tab-name') === attribute) {
+        item.classList.add('tab-active');
+      }
+    });
+  //}
+  return self;
 
-    if (item.getAttribute('data-tab-name') === attribute) {
-      item.classList.add('tab-active');
+};
+$.prototype.tabCreate = function(count) {
+
+  for (let i = 0; i < this.length; i++) {
+    this.selector[i].classList.add('tab');
+    this.selector[i].querySelector('ul').classList.add('tab-nav');
+    this.selector[i].querySelectorAll('li')[0].classList.add('tab-active')
+
+    for (let j = 0; j < count; j++) {
+      const li = this.selector[i].querySelectorAll('li')[j];
+      const div = this.selector[i].querySelectorAll('div')[j];
+      
+      li.setAttribute('data-tab-name', j);
+      div.setAttribute('data-tab-name', j);
+      div.classList.add('tab-content');
+      if (j === 0) {
+        div.classList.add('tab-active');
+      }
     }
     
-  });
+
+  }
+
   return this;
 };
