@@ -2,6 +2,7 @@ import $ from '../core';
 
 $.prototype.onTab = (e, self, selector) => {
   let attribute;
+  console.log(self)
   selector.querySelectorAll('[data-tab-name]').forEach(item => {
     item.classList.remove('tab-active');
     if (item === e.target) {
