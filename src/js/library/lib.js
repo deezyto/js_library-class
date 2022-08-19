@@ -6,5 +6,6 @@ import './modules/handler';
 
 import './components/tab';
 import './components/modal';
+import './components/slider';
 
 export default $;
