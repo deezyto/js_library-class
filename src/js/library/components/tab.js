@@ -15,13 +15,15 @@ $.prototype.onTab = (e, self, selector) => {
   return self;
 };
 
-$.prototype.tabCreate = function(count) {
+$.prototype.tabCreate = function() {
   for (let i = 0; i < this.length; i++) {
+    const length = this.selector[i].querySelectorAll('li').length;
+    console.log(length)
     this.selector[i].classList.add('tab');
     this.selector[i].querySelector('ul').classList.add('tab-nav');
     this.selector[i].querySelectorAll('li')[0].classList.add('tab-active')
 
-    for (let j = 0; j < count; j++) {
+    for (let j = 0; j < length; j++) {
       const li = this.selector[i].querySelectorAll('li')[j];
       const div = this.selector[i].querySelectorAll('div')[j];
       li.setAttribute('data-tab-name', j);
