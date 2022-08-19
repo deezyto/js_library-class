@@ -1,8 +1,10 @@
 .menu {
-    display: inline-flex;
+    display: flex;
+    justify-content: space-between;
     span {
         font-size: 20px;
         background: $blue-color;
+        display: block;
         padding-left: 25px;
         color: white;
         padding: 5px 10px;
@@ -40,6 +42,7 @@
     }
 
     .menu-item {
+        width: 100%;
         visibility: hidden;
     }
 
