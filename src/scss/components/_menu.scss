@@ -1,9 +1,11 @@
 .menu {
     display: flex;
     justify-content: space-between;
+    background: $blue-color;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     span {
         font-size: 20px;
-        background: $blue-color;
         display: block;
         padding-left: 25px;
         color: white;
@@ -15,6 +17,8 @@
         list-style-type: none;
         transition: 0.5s all;
         border: 1px solid $blue-color;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
         padding-top: 5px;
         li {
             border-bottom: 1px solid $blue-color;
