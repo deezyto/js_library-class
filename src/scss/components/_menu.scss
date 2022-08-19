@@ -9,6 +9,7 @@
         color: white;
         padding: 5px 10px;
         visibility: visible;
+        cursor: pointer;
     }
     ul {
         list-style-type: none;
@@ -40,13 +41,22 @@
             }
         }
     }
+    
+    .menu-item-link {
+        position: absolute;
+        width: 100%;
+        z-index: 10;
+        background: white;
+    }
 
     .menu-item {
         width: 100%;
         visibility: hidden;
+        position: relative;
     }
 
     .menu-item:hover ul {
         visibility: visible;
     }
+
 }
