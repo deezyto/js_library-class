@@ -26,7 +26,7 @@
         opacity: 0;
         position: relative;
         &.tab-active {
-            transition: 0.5s all;
+            transition: opacity 0.5s;
             visibility: visible;
             height: 100%;
             opacity: 1;
