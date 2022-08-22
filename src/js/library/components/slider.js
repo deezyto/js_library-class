@@ -89,7 +89,6 @@ $.prototype.slider = function({stepSlide = 1, slideOnPage = 0, points = false, a
       points.forEach((point, index) => {
         point.addEventListener('click', (e) => {
           if (e.target === point) {
-            console.log('point');
             removeActive();
             addActive(index);
             number = (index * stepSlide);
