@@ -19,17 +19,31 @@ $.prototype.slider = function(stepSlide = 1, slideOnPage = 0, points = false) {
     }
     let number = 0;
 
+    const removeActive = () => {
+      const points = this.selector[i].querySelectorAll('ol li');
+      points.forEach(point => {
+        point.classList.remove('active');
+      });
+    }
+
+    const addActive = (index) => {
+      const points = this.selector[i].querySelectorAll('ol li');
+      points[index].classList.add('active');
+    }
+
     if (points) {
       const ol = document.createElement('ol');
+      const length = Math.floor((slideAll.length / stepSlide));
+      console.log(length)
       sliderPoints.append(ol);
-      for (let i = 0; i < slideAll.length; i++) {
+      for (let i = 0; i < length; i++) {
         const ol = document.createElement('ol');
         const li = document.createElement('li');
 
         if (i === 0) {
           li.classList.add('active');
         }
-        sliderPoints.append(li);
+        sliderPoints.querySelector('ol').append(li);
       }
     }
 
@@ -54,6 +68,8 @@ $.prototype.slider = function(stepSlide = 1, slideOnPage = 0, points = false) {
           } else {
             slider.style.transform = `translateX(-${number * slideWidthFilter}%)`;
           }
+          removeActive();
+          addActive(number);
         }
       });
     });

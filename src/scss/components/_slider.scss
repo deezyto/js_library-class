@@ -38,4 +38,26 @@
         min-width: 100%;
         height: 100%;
     }
+    .slider-points {
+        ol {
+            position: absolute;
+            z-index: 10;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            column-gap: 5px;
+            bottom: 0;
+            li {
+                width: 20px;
+                height: 10px;
+                background: $blue-color;
+                cursor: pointer;
+                list-style-type: none;
+                opacity: 0.5;
+                &.active {
+                    opacity: 1;
+                }
+            }
+        }
+    }
 }
