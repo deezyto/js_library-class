@@ -19,7 +19,7 @@ $.prototype.slider = function({stepSlide = 1, slideOnPage = 0, points = false, a
       sliderSlides.classList.add('slider-slides');
       this.selector[i].insertBefore(sliderSlides, this.selector[i].children[2]);
       const countImg = this.selector[i].querySelectorAll('img');
-      console.log(countImg)
+
       for (let j = 0; j < countImg.length; j++) {
         const sliderSlide = document.createElement('div');
         sliderSlide.classList.add('slider-slide');
@@ -134,7 +134,6 @@ $.prototype.slider = function({stepSlide = 1, slideOnPage = 0, points = false, a
             } else {
               number = slideAll.length;
             }
-            
           }
           if (number < stepSlide) {
             number = 0;
