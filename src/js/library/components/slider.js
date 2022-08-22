@@ -1,6 +1,6 @@
 import $ from '../core';
 
-$.prototype.slider = function(stepSlide = 1, slideOnPage = 0, points = false) {
+$.prototype.slider = function(stepSlide = 1, slideOnPage = 0, points = false, autoSlide = false) {
   for (let i = 0; i < this.length; i++) {
     const slider = this.selector[i].querySelector('.slider-slides');
     const prev = this.selector[i].querySelector('.slider-nav .prev');
@@ -10,6 +10,7 @@ $.prototype.slider = function(stepSlide = 1, slideOnPage = 0, points = false) {
     const sliderPoints = this.selector[i].querySelector('.slider-points');
     let slideWidthFilter = slideWidth.replace(/[^0-9]/g, '');
     const slideAll = this.selector[i].querySelectorAll('.slider-slide');
+    let slideInterval;
 
     if (slideOnPage) {
       const calcWidth = 100 / slideOnPage;
@@ -74,6 +75,24 @@ $.prototype.slider = function(stepSlide = 1, slideOnPage = 0, points = false) {
     }
     navPoints();
 
+    if (autoSlide) {
+      if (!slideInterval) {
+        slideInterval = setInterval(() => {
+          next.click();
+        }, autoSlide);
+      }
+      ['mouseenter', 'mouseleave'].forEach(event => {
+        this.selector[i].addEventListener(event, (e) => {
+          if (event === 'mouseenter') {
+            clearInterval(slideInterval);
+          } else if (event === 'mouseleave') {
+            slideInterval = setInterval(() => {
+              next.click();
+            }, autoSlide);
+          }
+        });
+      });
+    }
 
     [prev, next].forEach(button => {
       button.addEventListener('click', (e) => {
