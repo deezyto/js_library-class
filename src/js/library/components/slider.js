@@ -10,6 +10,8 @@ $.prototype.slider = function({stepSlide = 1, slideOnPage = 0, points = false, a
     const sliderPoints = this.selector[i].querySelector('.slider-points');
     const slideAll = this.selector[i].querySelectorAll('.slider-slide');
     let slideWidthFilter = slideWidth.replace(/[^0-9]/g, '');
+    let number = 0;
+    let indexPoint = 0;
     let slideInterval;
 
     if (slideOnPage) {
@@ -19,8 +21,6 @@ $.prototype.slider = function({stepSlide = 1, slideOnPage = 0, points = false, a
       });
       slideWidthFilter = calcWidth;
     }
-    let number = 0;
-    let indexPoint = 0;
 
     const pointsLength = () => {
       let length = Math.floor((slideAll.length / stepSlide));
