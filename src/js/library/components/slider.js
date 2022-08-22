@@ -21,10 +21,18 @@ $.prototype.slider = function(stepSlide = 1, slideOnPage = 0, points = false) {
     let number = 0;
     let indexPoint = 0;
 
+    const pointsLength = () => {
+      let length = Math.floor((slideAll.length / stepSlide));
+
+      if (slideAll.length % stepSlide !== 0) {
+        length++;
+      }
+      return length;
+    }
     if (points) {
       const ol = document.createElement('ol');
-      const length = Math.floor((slideAll.length / stepSlide));
-      console.log(length)
+      const length = pointsLength();
+
       sliderPoints.append(ol);
       for (let i = 0; i < length; i++) {
         const ol = document.createElement('ol');
@@ -71,14 +79,18 @@ $.prototype.slider = function(stepSlide = 1, slideOnPage = 0, points = false) {
       button.addEventListener('click', (e) => {
         console.log('click')
         const points = this.selector[i].querySelectorAll('ol li');
-        const length = Math.floor((slideAll.length / stepSlide));
+        const length = pointsLength();
         if (e.target === prev) {
           
           if (number <= 0) {
             number = slideAll.length;
           }
-          number -= stepSlide;
-
+          if (number < stepSlide) {
+            number = 0;
+          } else {
+            number -= stepSlide;
+          }
+          
           slider.style.transform = `translateX(-${number * slideWidthFilter}%)`;
 
           if (indexPoint <= 0) {

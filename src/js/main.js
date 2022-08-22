@@ -5,5 +5,5 @@ window.addEventListener('DOMContentLoaded', () => {
   new $('#tab .tab-nav li').event(new $('#tab .tab-nav li').onTab, 'click');
   new $('#tab1').tabCreate().event(new $('#tab1 .tab-nav li').onTab, 'click');
   new $('[data-modal-id]').modal();
-  new $('#slider').slider(2, 2, true);
+  new $('#slider').slider(3, 3, true);
 });
