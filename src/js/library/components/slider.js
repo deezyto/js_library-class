@@ -1,7 +1,33 @@
 import $ from '../core';
 
-$.prototype.slider = function({stepSlide = 1, slideOnPage = 0, points = false, autoSlide = false, slideEnd = false}) {
+$.prototype.slider = function({stepSlide = 1, slideOnPage = 0, points = false, autoSlide = false, slideEnd = false, create = false}) {
   for (let i = 0; i < this.length; i++) {
+
+    if (create) {
+      const sliderNav = document.createElement('div');
+      sliderNav.classList.add('slider-nav');
+      const buttonPrev = document.createElement('button');
+      buttonPrev.classList.add('prev');
+      const buttonNext = document.createElement('button');
+      buttonNext.classList.add('next');
+      this.selector[i].prepend(sliderNav);
+      this.selector[i].querySelector('.slider-nav').append(buttonPrev, buttonNext);
+      const sliderPoints = document.createElement('div');
+      sliderPoints.classList.add('slider-points');
+      this.selector[i].insertBefore(sliderPoints, this.selector[i].children[1]);
+      const sliderSlides = document.createElement('div');
+      sliderSlides.classList.add('slider-slides');
+      this.selector[i].insertBefore(sliderSlides, this.selector[i].children[2]);
+      const countImg = this.selector[i].querySelectorAll('img');
+      console.log(countImg)
+      for (let j = 0; j < countImg.length; j++) {
+        const sliderSlide = document.createElement('div');
+        sliderSlide.classList.add('slider-slide');
+        sliderSlide.append(countImg[j]);
+        this.selector[i].querySelector('.slider-slides').append(sliderSlide);
+      }
+    }
+
     const slider = this.selector[i].querySelector('.slider-slides');
     const prev = this.selector[i].querySelector('.slider-nav .prev');
     const next = this.selector[i].querySelector('.slider-nav .next');
@@ -37,7 +63,6 @@ $.prototype.slider = function({stepSlide = 1, slideOnPage = 0, points = false, a
 
       sliderPoints.append(ol);
       for (let i = 0; i < length; i++) {
-        const ol = document.createElement('ol');
         const li = document.createElement('li');
 
         if (i === 0) {

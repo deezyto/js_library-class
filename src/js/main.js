@@ -6,4 +6,6 @@ window.addEventListener('DOMContentLoaded', () => {
   new $('#tab1').tabCreate().event(new $('#tab1 .tab-nav li').onTab, 'click');
   new $('[data-modal-id]').modal();
   new $('#slider').slider({stepSlide: 1, slideOnPage: 2, points: true});
+  new $('#slider1').slider({create: true, stepSlide: 1, slideOnPage: 2, points: true});
+
 });
