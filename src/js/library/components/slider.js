@@ -10,6 +10,7 @@ $.prototype.slider = function(stepSlide = 1, slideOnPage = 0, points = false) {
     const sliderPoints = this.selector[i].querySelector('.slider-points');
     let slideWidthFilter = slideWidth.replace(/[^0-9]/g, '');
     const slideAll = this.selector[i].querySelectorAll('.slider-slide');
+
     if (slideOnPage) {
       const calcWidth = 100 / slideOnPage;
       slideAll.forEach(slide => {
@@ -19,17 +20,7 @@ $.prototype.slider = function(stepSlide = 1, slideOnPage = 0, points = false) {
     }
     let number = 0;
 
-    const removeActive = () => {
-      const points = this.selector[i].querySelectorAll('ol li');
-      points.forEach(point => {
-        point.classList.remove('active');
-      });
-    }
-
-    const addActive = (index) => {
-      const points = this.selector[i].querySelectorAll('ol li');
-      points[index].classList.add('active');
-    }
+    
 
     if (points) {
       const ol = document.createElement('ol');
@@ -46,6 +37,35 @@ $.prototype.slider = function(stepSlide = 1, slideOnPage = 0, points = false) {
         sliderPoints.querySelector('ol').append(li);
       }
     }
+
+    const removeActive = () => {
+      const points = this.selector[i].querySelectorAll('ol li');
+      points.forEach(point => {
+        point.classList.remove('active');
+      });
+    }
+
+    const addActive = (index) => {
+      const points = this.selector[i].querySelectorAll('ol li');
+      points[index].classList.add('active');
+    }
+
+    const navPoints = () => {
+      const points = this.selector[i].querySelectorAll('ol li');
+      points.forEach((point, index) => {
+        point.addEventListener('click', (e) => {
+          if (e.target === point) {
+            console.log('point');
+            removeActive();
+            addActive(index);
+            number = index;
+            slider.style.transform = `translateX(-${number * slideWidthFilter}%)`;
+          }
+        });
+      });
+    }
+    navPoints();
+
 
     [prev, next].forEach(button => {
       button.addEventListener('click', (e) => {
