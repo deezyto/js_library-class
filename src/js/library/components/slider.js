@@ -1,12 +1,13 @@
 import $ from '../core';
 
-$.prototype.slider = function(stepSlide = 1, slideOnPage = 0) {
+$.prototype.slider = function(stepSlide = 1, slideOnPage = 0, points = false) {
   for (let i = 0; i < this.length; i++) {
     const slider = this.selector[i].querySelector('.slider-slides');
     const prev = this.selector[i].querySelector('.slider-nav .prev');
     const next = this.selector[i].querySelector('.slider-nav .next');
     const slide = this.selector[i].querySelector('.slider-slide');
     const slideWidth = window.getComputedStyle(slide).width;
+    const sliderPoints = this.selector[i].querySelector('.slider-points');
     let slideWidthFilter = slideWidth.replace(/[^0-9]/g, '');
     const slideAll = this.selector[i].querySelectorAll('.slider-slide');
     if (slideOnPage) {
@@ -17,6 +18,20 @@ $.prototype.slider = function(stepSlide = 1, slideOnPage = 0) {
       slideWidthFilter = calcWidth;
     }
     let number = 0;
+
+    if (points) {
+      const ol = document.createElement('ol');
+      sliderPoints.append(ol);
+      for (let i = 0; i < slideAll.length; i++) {
+        const ol = document.createElement('ol');
+        const li = document.createElement('li');
+
+        if (i === 0) {
+          li.classList.add('active');
+        }
+        sliderPoints.append(li);
+      }
+    }
 
     [prev, next].forEach(button => {
       button.addEventListener('click', (e) => {
