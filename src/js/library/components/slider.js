@@ -1,6 +1,6 @@
 import $ from '../core';
 
-$.prototype.slider = function(stepSlide = 1, slideOnPage = 0, points = false, autoSlide = false) {
+$.prototype.slider = function({stepSlide = 1, slideOnPage = 0, points = false, autoSlide = false, slideEnd = false}) {
   for (let i = 0; i < this.length; i++) {
     const slider = this.selector[i].querySelector('.slider-slides');
     const prev = this.selector[i].querySelector('.slider-nav .prev');
@@ -8,8 +8,8 @@ $.prototype.slider = function(stepSlide = 1, slideOnPage = 0, points = false, au
     const slide = this.selector[i].querySelector('.slider-slide');
     const slideWidth = window.getComputedStyle(slide).width;
     const sliderPoints = this.selector[i].querySelector('.slider-points');
-    let slideWidthFilter = slideWidth.replace(/[^0-9]/g, '');
     const slideAll = this.selector[i].querySelectorAll('.slider-slide');
+    let slideWidthFilter = slideWidth.replace(/[^0-9]/g, '');
     let slideInterval;
 
     if (slideOnPage) {
@@ -30,6 +30,7 @@ $.prototype.slider = function(stepSlide = 1, slideOnPage = 0, points = false, au
       }
       return length;
     }
+
     if (points) {
       const ol = document.createElement('ol');
       const length = pointsLength();
@@ -75,14 +76,17 @@ $.prototype.slider = function(stepSlide = 1, slideOnPage = 0, points = false, au
     }
     navPoints();
 
-    if (autoSlide) {
+    if (autoSlide && !slideEnd) {
+      if (typeof(autoSlide) !== 'number') {
+        autoSlide = 500;
+      }
       if (!slideInterval) {
         slideInterval = setInterval(() => {
           next.click();
         }, autoSlide);
       }
       ['mouseenter', 'mouseleave'].forEach(event => {
-        this.selector[i].addEventListener(event, (e) => {
+        this.selector[i].addEventListener(event, () => {
           if (event === 'mouseenter') {
             clearInterval(slideInterval);
           } else if (event === 'mouseleave') {
@@ -96,13 +100,16 @@ $.prototype.slider = function(stepSlide = 1, slideOnPage = 0, points = false, au
 
     [prev, next].forEach(button => {
       button.addEventListener('click', (e) => {
-        console.log('click')
-        const points = this.selector[i].querySelectorAll('ol li');
         const length = pointsLength();
         if (e.target === prev) {
           
           if (number <= 0) {
-            number = slideAll.length;
+            if (slideEnd) {
+              number = 0;
+            } else {
+              number = slideAll.length;
+            }
+            
           }
           if (number < stepSlide) {
             number = 0;
@@ -113,7 +120,12 @@ $.prototype.slider = function(stepSlide = 1, slideOnPage = 0, points = false, au
           slider.style.transform = `translateX(-${number * slideWidthFilter}%)`;
 
           if (indexPoint <= 0) {
-            indexPoint = length - 1;
+            if (slideEnd) {
+              indexPoint = 0;
+            } else {
+              indexPoint = length - 1;
+            }
+            
           } else {
             indexPoint--;
           }
@@ -124,8 +136,13 @@ $.prototype.slider = function(stepSlide = 1, slideOnPage = 0, points = false, au
         } else if (e.target === next) {
           number += stepSlide;
           if (number >= slideAll.length) {
-            slider.style.transform = '';
-            number = 0;
+            if (slideEnd) {
+              number = slideAll.length - 1;
+            } else {
+              slider.style.transform = '';
+              number = 0;
+            }
+            
           } else {
             slider.style.transform = `translateX(-${number * slideWidthFilter}%)`;
           }
@@ -133,10 +150,16 @@ $.prototype.slider = function(stepSlide = 1, slideOnPage = 0, points = false, au
           indexPoint++;
 
           if (indexPoint >= length) {
-            indexPoint = 0;
+            if (slideEnd) {
+              indexPoint = length - 1;
+            } else {
+              indexPoint = 0;
+            }
+            
           }
           removeActive();
           addActive(indexPoint);
+
         }
       });
     });
