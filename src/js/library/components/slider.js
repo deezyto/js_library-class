@@ -19,8 +19,7 @@ $.prototype.slider = function(stepSlide = 1, slideOnPage = 0, points = false) {
       slideWidthFilter = calcWidth;
     }
     let number = 0;
-
-    
+    let indexPoint = 0;
 
     if (points) {
       const ol = document.createElement('ol');
@@ -58,7 +57,8 @@ $.prototype.slider = function(stepSlide = 1, slideOnPage = 0, points = false) {
             console.log('point');
             removeActive();
             addActive(index);
-            number = index;
+            number = (index * stepSlide);
+            indexPoint = index;
             slider.style.transform = `translateX(-${number * slideWidthFilter}%)`;
           }
         });
@@ -70,7 +70,8 @@ $.prototype.slider = function(stepSlide = 1, slideOnPage = 0, points = false) {
     [prev, next].forEach(button => {
       button.addEventListener('click', (e) => {
         console.log('click')
-        
+        const points = this.selector[i].querySelectorAll('ol li');
+        const length = Math.floor((slideAll.length / stepSlide));
         if (e.target === prev) {
           
           if (number <= 0) {
@@ -80,6 +81,15 @@ $.prototype.slider = function(stepSlide = 1, slideOnPage = 0, points = false) {
 
           slider.style.transform = `translateX(-${number * slideWidthFilter}%)`;
 
+          if (indexPoint <= 0) {
+            indexPoint = length - 1;
+          } else {
+            indexPoint--;
+          }
+
+          removeActive();
+          addActive(indexPoint);
+          
         } else if (e.target === next) {
           number += stepSlide;
           if (number >= slideAll.length) {
@@ -88,8 +98,14 @@ $.prototype.slider = function(stepSlide = 1, slideOnPage = 0, points = false) {
           } else {
             slider.style.transform = `translateX(-${number * slideWidthFilter}%)`;
           }
+
+          indexPoint++;
+
+          if (indexPoint >= length) {
+            indexPoint = 0;
+          }
           removeActive();
-          addActive(number);
+          addActive(indexPoint);
         }
       });
     });
