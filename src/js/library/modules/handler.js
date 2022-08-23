@@ -16,10 +16,10 @@ $.prototype.event = function(callback, ...event) {
 
 $.prototype.eventClick = function(callback) {
   for (let i = 0; i < this.length; i++) {
-    this.selector[i].addEventListener('click', () => {
+    this.selector[i].addEventListener('click', (e) => {
       console.log('click');
       if (callback) {
-        callback();
+        callback(e);
       }
     });
   }

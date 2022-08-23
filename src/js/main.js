@@ -8,4 +8,11 @@ window.addEventListener('DOMContentLoaded', () => {
   new $('#slider').slider({stepSlide: 1, slideOnPage: 2, points: true});
   new $('#slider1').slider({create: true, stepSlide: 1, slideOnPage: 2, points: true});
 
+  new $('.library').ifIndex([0]).eventClick((e) => {
+    new $('.library').ifIndex([0]).fadeIn({e: e, duration: 1000});
+  });
+  new $('.library').ifIndex([1]).eventClick((e) => {
+    new $('.library').ifIndex([1]).fadeOut({e: e, duration: 1000});
+  });
+  new $('.library').ifIndex([0]).fadeIn({duration: 1000});
 });
