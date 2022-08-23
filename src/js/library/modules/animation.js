@@ -32,8 +32,6 @@ $.prototype.animation = function(e, duration, toNumber = 1, callback) {
 $.prototype.fadeIn = function({e = 0, duration, toNumber = 1}) {
   console.log(e.target)
   for (let i = 0; i < this.length; i++) {
-    const width = window.getComputedStyle(this.selector[i]).width;
-    console.log(this.selectorName)
     const fadeInAnimation = (e, elapsed, duration, toNumber, end) => {
       const count = Math.min(elapsed / duration, toNumber);
       this.selector[i].style.cssText = 'display';
@@ -49,8 +47,6 @@ $.prototype.fadeIn = function({e = 0, duration, toNumber = 1}) {
 $.prototype.fadeOut = function({e = 0, duration, toNumber = 1}) {
   console.log(e.target)
   for (let i = 0; i < this.length; i++) {
-    const width = window.getComputedStyle(this.selector[i]).width;
-    console.log(this.selectorName)
     const fadeInAnimation = (e, elapsed, duration, toNumber, end) => {
       const count = Math.min(elapsed / duration, toNumber);
       this.selector[i].style.opacity = toNumber - count;
