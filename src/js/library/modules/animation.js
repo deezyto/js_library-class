@@ -70,7 +70,7 @@ $.prototype.fadeToggle = function({duration}) {
   }
 };
 
-$.prototype.accordion = function({e = 0, duration, toNumber = 100, typeCount = 'height'}) {
+$.prototype.downUp = function({e = 0, duration, toNumber = 100, typeCount = 'height'}) {
   for (let i = 0; i < this.length; i++) {
     const fadeInAnimation = (elapsed, end) => {
       const count = Math.min(elapsed / duration, toNumber);
