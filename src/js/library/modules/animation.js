@@ -1,6 +1,6 @@
 import $ from '../core';
 
-$.prototype.animation = function(e, duration, toNumber = 1, callback) {
+$.prototype.animation = function(e, duration, callback) {
   let timeStart;
   let timePrev = 0;
   let end = false;
@@ -13,7 +13,7 @@ $.prototype.animation = function(e, duration, toNumber = 1, callback) {
     if (timePrev !== time) {
       
       if (callback) {
-        callback(e, elapsed, duration, toNumber, end);
+        callback(elapsed, end);
       }
 
     }
@@ -29,32 +29,58 @@ $.prototype.animation = function(e, duration, toNumber = 1, callback) {
   window.requestAnimationFrame(animate);
 };
 
-$.prototype.fadeIn = function({e = 0, duration, toNumber = 1}) {
-  console.log(e.target)
+$.prototype.fadeIn = function({e = 0, duration, toNumber = 1, typeCount = 'opacity'}) {
   for (let i = 0; i < this.length; i++) {
-    const fadeInAnimation = (e, elapsed, duration, toNumber, end) => {
+    const fadeInAnimation = (elapsed, end) => {
       const count = Math.min(elapsed / duration, toNumber);
       this.selector[i].style.cssText = 'display';
-      this.selector[i].style.opacity = count;
-        if (count >= toNumber) {
-          end = true;
-        }
+      this.selector[i].style.cssText = `${typeCount}: ${count};`;
+      if (count >= toNumber) {
+        end = true;
+      }
     }
-    $.prototype.animation(e, duration, toNumber, fadeInAnimation)
+    $.prototype.animation(e, duration, fadeInAnimation)
   }
 };
 
 $.prototype.fadeOut = function({e = 0, duration, toNumber = 1}) {
   console.log(e.target)
+  
   for (let i = 0; i < this.length; i++) {
-    const fadeInAnimation = (e, elapsed, duration, toNumber, end) => {
+    const fadeInAnimation = (elapsed, end) => {
       const count = Math.min(elapsed / duration, toNumber);
       this.selector[i].style.opacity = toNumber - count;
-        if ((1 - count) === 0) {
-          this.selector[i].style.cssText = 'display: none';
+      if ((toNumber - count) === 0) {
+        this.selector[i].style.cssText = 'display: none';
+        end = true;
+      }
+    }
+    $.prototype.animation(e, duration, fadeInAnimation)
+  }
+};
+
+$.prototype.fadeToggle = function({duration}) {
+  for (let i = 0; i < this.length; i++) {
+    const style = window.getComputedStyle(this.selector[i]).display;
+    if (style === 'none') {
+      new $(this.selectorName).fadeIn({duration: duration})
+    } else {
+      new $(this.selectorName).fadeOut({duration: duration})
+    }
+  }
+};
+
+$.prototype.accordion = function({e = 0, duration, toNumber = 100, typeCount = 'height'}) {
+  for (let i = 0; i < this.length; i++) {
+    const fadeInAnimation = (elapsed, end) => {
+      const count = Math.min(elapsed / duration, toNumber);
+      this.selector[i].style.cssText = 'display';
+      this.selector[i].style.cssText = `${typeCount}: ${count};`;
+      console.log(elapsed, 'elapsed')
+        if (count >= toNumber) {
           end = true;
         }
     }
-    $.prototype.animation(e, duration, toNumber, fadeInAnimation)
+    $.prototype.animation(e, duration, fadeInAnimation)
   }
 };

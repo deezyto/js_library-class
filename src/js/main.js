@@ -15,4 +15,5 @@ window.addEventListener('DOMContentLoaded', () => {
     new $('.library').ifIndex([1]).fadeOut({e: e, duration: 1000});
   });
   new $('.library').ifIndex([0]).fadeIn({duration: 1000});
+  new $('.library-1').fadeToggle({duration: 1000});
 });
