@@ -1,6 +1,6 @@
 import $ from '../core';
 
-$.prototype.animation = function(e = 0, duration, callback) {
+$.prototype.animation = function({duration, callback, event = 0}) {
   let timeStart;
   let timePrev = 0;
   let end = false;
@@ -29,7 +29,7 @@ $.prototype.animation = function(e = 0, duration, callback) {
   window.requestAnimationFrame(animate);
 };
 
-$.prototype.fadeIn = function({e = 0, duration, toNumber = 1, typeCount = 'opacity'}) {
+$.prototype.fadeIn = function({duration, toNumber = 1, typeCount = 'opacity', event = 0}) {
   for (let i = 0; i < this.length; i++) {
     const fadeInAnimation = (elapsed, end) => {
       const count = Math.min(elapsed / duration, toNumber);
@@ -39,11 +39,11 @@ $.prototype.fadeIn = function({e = 0, duration, toNumber = 1, typeCount = 'opaci
         end = true;
       }
     }
-    $.prototype.animation(e, duration, fadeInAnimation)
+    $.prototype.animation({duration: duration, callback: fadeInAnimation})
   }
 };
 
-$.prototype.fadeOut = function({e = 0, duration, toNumber = 1}) {
+$.prototype.fadeOut = function({duration, toNumber = 1, event = 0}) {
   
   for (let i = 0; i < this.length; i++) {
     const fadeInAnimation = (elapsed, end) => {
@@ -54,7 +54,7 @@ $.prototype.fadeOut = function({e = 0, duration, toNumber = 1}) {
         end = true;
       }
     }
-    $.prototype.animation(e, duration, fadeInAnimation)
+    $.prototype.animation({duration: duration, callback: fadeInAnimation})
   }
 };
 
@@ -69,60 +69,26 @@ $.prototype.fadeToggle = function({duration}) {
   }
 };
 
-$.prototype.downUp = function({e = 0, duration, typeCount = 'height'}) {
+$.prototype.downUp = function({duration, event = 0}) {
   for (let i = 0; i < this.length; i++) {
-    this.selector[i].addEventListener('click', (e) => {
+    this.selector[i].addEventListener('click', () => {
+      let count = 0;
       const active = this.selector[i].parentNode.classList.contains('active-content');
-        let countHeight = 0;
-        let countPaddingTop = 0;
-        let countPaddingBottom = 0;
-      if (!active) {
-        
-        this.selector[i].parentNode.classList.add('active-content');
-        const paddingTop = +window.getComputedStyle(this.selector[i].nextElementSibling).paddingTop.replace(/px/, '');
-        const paddingBottom = +window.getComputedStyle(this.selector[i].nextElementSibling).paddingBottom.replace(/px/, '');
-        const height = +window.getComputedStyle(this.selector[i].nextElementSibling).height.replace(/px/, '');
-
-        const animate = (elapsed) => {
-          countHeight = Math.min(elapsed * (height / duration), height);
-          countPaddingTop = Math.min(elapsed * (paddingTop / (duration / 2)), paddingTop);
-          countPaddingBottom = Math.min(elapsed * (paddingBottom / (duration / 2)), paddingBottom);
-          this.selector[i].nextElementSibling.style.cssText = 'display';
-          this.selector[i].nextElementSibling.style.cssText = `
-          ${typeCount}: ${countHeight}px; 
-          padding-top: ${countPaddingTop}px; 
-          padding-bottom: ${countPaddingBottom}px;
-          `;
-        }
-
-        $.prototype.animation(e, duration, animate);
-      } else {
-        /* let countHeight = 0;
-        let countPaddingTop = 0;
-        let countPaddingBottom = 0; */
-        
-        const paddingTop = +window.getComputedStyle(this.selector[i].nextElementSibling).paddingTop.replace(/px/, '');
-        const paddingBottom = +window.getComputedStyle(this.selector[i].nextElementSibling).paddingBottom.replace(/px/, '');
-        const height = +window.getComputedStyle(this.selector[i].nextElementSibling).height.replace(/px/, '');
-        const animate = (elapsed) => {
-          countHeight = Math.min(elapsed * (height / duration), height);
-          countPaddingTop = Math.min(elapsed * (paddingTop / duration), paddingTop);
-          countPaddingBottom = Math.min(elapsed * (paddingBottom / duration), paddingBottom);
-          
-          this.selector[i].nextElementSibling.style.cssText = `
-          ${typeCount}: ${height - countHeight}px; 
-          padding-top: ${paddingTop - countPaddingTop}px; 
-          padding-bottom: ${paddingBottom - countPaddingBottom}px;
-          `;
-          if ((height - countHeight) <= 0) {
+      const height = +window.getComputedStyle(this.selector[i].parentNode.querySelector('.downUp-item-content')).height.replace(/px/, '');
+      this.selector[i].parentNode.classList.add('active-content');
+      const animate = (elapsed) => {
+        count = Math.min(elapsed * (height / duration), height);
+        if (active) {
+          this.selector[i].nextElementSibling.style.cssText = `height: ${height - count}px;`;
+          if ((height - count) <= 0) {
             this.selector[i].parentNode.classList.remove('active-content');
             this.selector[i].nextElementSibling.style = '';
           }
+        } else {
+          this.selector[i].nextElementSibling.style.cssText = `height: ${count}px;`;
         }
-
-        $.prototype.animation(e, duration, animate);
       }
-      
+      $.prototype.animation({duration: duration, callback: animate});
     });
   }
 };

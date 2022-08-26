@@ -3,10 +3,10 @@
     &-item-title {
         border-radius: 5px;
         border: 1px solid $blue-color;
-        cursor: pointer;
         padding: 10px 20px;
         font-size: 18px;
         position: relative;
+        cursor: pointer;
         &:before {
             content: "";
             border: solid #2264d1;
@@ -23,23 +23,17 @@
             transition: .5s all;
         }
     }
+    .wrapper {
+        height: 0;
+    }
     &-item-content {
         overflow: hidden;
-        position: absolute;
-        visibility: hidden;
         font-size: 15px;
+        padding: 10px 15px;
     }
     &-item {
+        overflow: hidden;
         &.active-content {
-            .downUp-item-content {
-                visibility: visible;
-                position: relative;
-                padding-bottom: 10px;
-                padding-top: 10px;
-                padding-left: 20px;
-                padding-right: 20px;
-            }
-
             .downUp-item-title {
                 &:before {
                     content: "";
