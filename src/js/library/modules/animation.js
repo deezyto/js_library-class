@@ -73,10 +73,11 @@ $.prototype.downUp = function({e = 0, duration, typeCount = 'height'}) {
   for (let i = 0; i < this.length; i++) {
     this.selector[i].addEventListener('click', (e) => {
       const active = this.selector[i].parentNode.classList.contains('active-content');
-      if (!active) {
         let countHeight = 0;
         let countPaddingTop = 0;
         let countPaddingBottom = 0;
+      if (!active) {
+        
         this.selector[i].parentNode.classList.add('active-content');
         const paddingTop = +window.getComputedStyle(this.selector[i].nextElementSibling).paddingTop.replace(/px/, '');
         const paddingBottom = +window.getComputedStyle(this.selector[i].nextElementSibling).paddingBottom.replace(/px/, '');
@@ -96,9 +97,9 @@ $.prototype.downUp = function({e = 0, duration, typeCount = 'height'}) {
 
         $.prototype.animation(e, duration, animate);
       } else {
-        let countHeight = 0;
+        /* let countHeight = 0;
         let countPaddingTop = 0;
-        let countPaddingBottom = 0;
+        let countPaddingBottom = 0; */
         
         const paddingTop = +window.getComputedStyle(this.selector[i].nextElementSibling).paddingTop.replace(/px/, '');
         const paddingBottom = +window.getComputedStyle(this.selector[i].nextElementSibling).paddingBottom.replace(/px/, '');
