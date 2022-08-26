@@ -1,0 +1,42 @@
+.dp-block {
+    display: block;
+}
+
+.dp-inline-block {
+    display: inline-block;
+}
+
+.dp-none {
+    display: none;
+}
+
+.dp-inline {
+    display: inline;
+}
+
+.dp-flex {
+    display: flex;
+}
+
+.dp-inline-flex {
+    display: inline-flex;
+}
+
+.dp-grid {
+    display: grid;
+    &.grid-column-1 {
+        grid-template-columns: auto;
+    }
+    &.grid-column-2 {
+        grid-template-columns: repeat(2, auto);
+    }
+    &.grid-column-3 {
+        grid-template-columns: repeat(3, auto);
+    }
+    &.grid-column-4 {
+        grid-template-columns: repeat(4, auto);
+    }
+    &.grid-column-5 {
+        grid-template-columns: repeat(5, auto);
+    }
+}
