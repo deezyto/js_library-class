@@ -2,7 +2,7 @@
   "name": "js-mini-library",
   "version": "1.0.0",
   "description": "JavaScript library",
-  "main": "index.js",
+  "main": "dist/script.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
