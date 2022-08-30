@@ -1,13 +1,13 @@
 {
-  "name": "library",
+  "name": "js-mini-library",
   "version": "1.0.0",
-  "description": "",
+  "description": "JavaScript library",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "deezyto",
+  "license": "MIT",
   "browserslist": [
     "last 2 chrome versions",
     "last 2 firefox versions",
@@ -31,5 +31,20 @@
   },
   "dependencies": {
     "chalk": "^2.4.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deezyto/js_mini_library.git"
+  },
+  "keywords": [
+    "js",
+    "library",
+    "library",
+    "slider",
+    "tabs"
+  ],
+  "bugs": {
+    "url": "https://github.com/deezyto/js_mini_library/issues"
+  },
+  "homepage": "https://github.com/deezyto/js_mini_library#readme"
 }
